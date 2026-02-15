@@ -2,7 +2,7 @@
 
 ![Brand](https://img.shields.io/badge/Brand-DEON%20electronics-blue)
 ![Hardware](https://img.shields.io/badge/Hardware-ESP32--S3--N16R8-orange)
-![Power](https://img.shields.io/badge/LDO-XC6220B331MR-green)
+
 
 **DEONGotchi** est une console de poche haute performance dédiée à la simulation de vie artificielle. Développée par **DEON electronics**, elle combine une puissance de calcul élevée et une gestion fine de l'énergie pour une expérience utilisateur premium.
 
