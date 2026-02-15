@@ -1,28 +1,67 @@
-# DeonGotchi
+# 🐾 DEONGotchi — The Haptic Companion
 
-### **DeonGotchi : Le Tamagotchi Réinventé par Deon**
+![Hardware Status](https://img.shields.io/badge/Hardware-ESP32--S3-orange)
+![Interface](https://img.shields.io/badge/Interface-ST7789--LCD-blue)
+![Audio](https://img.shields.io/badge/Audio-I2S--Haptic-brightgreen)
 
-**NeoDeon** est un compagnon virtuel autonome alliant l'esthétique rétro des années 90 à une architecture matérielle de pointe. Conçu autour de l'**ESP32-S3**, ce projet dépasse le simple jouet électronique pour devenir une console haptique miniature capable de générer des interactions physiques synchronisées avec son environnement sonore.
-
-#### **Cœur Technologique**
-
-Le projet est piloté par le script central **`MapToMeshGenerator`**, qui gère la logique de vie de la créature et l'affichage fluide sur un écran LCD **ST7789V**. Grâce aux 8 Mo de PSRAM du module S3, l'appareil peut traiter des animations complexes stockées sur une carte SD via un bus **SDMMC 4-bits** ultra-rapide.
-
-#### **Expérience Sensorielle Immersive**
-
-NeoDeon se distingue par sa capacité à "ressentir" et à "émettre" :
-
-* **Audio-Haptique :** L'amplificateur **MAX98357A** délivre un son clair au haut-parleur de 0.7W. Simultanément, le pilote **DRV2605L** analyse le flux audio pour faire vibrer le moteur LRA, permettant au compagnon de vibrer physiquement au rythme de ses propres cris.
-* **Interactivité :** Un gyroscope/accéléromètre I2C détecte les mouvements du joueur, permettant de réveiller la créature en secouant l'appareil.
-
-#### **Interface et Ergonomie**
-
-Le contrôle est assuré par un switch tactile à 5 directions (D-pad numérique), offrant une navigation précise dans les menus sans encombrer l'écran.
-
-#### **Gestion de l'Énergie**
-
-Optimisé pour la mobilité, NeoDeon intègre un régulateur **XC6220B331MR** à très faible chute de tension. Ce choix garantit un fonctionnement stable à 3.3V jusqu'à l'épuisement de la batterie LiPo, tout en supportant les pics de courant du Wi-Fi et du moteur haptique.
+**DEONGotchi** est une console de poche "Virtual Pet" nouvelle génération. Conçue par **DEON**, elle repousse les limites du genre en intégrant des retours haptiques haute définition synchronisés sur le son et un moteur de rendu fluide sur ESP32-S3.
 
 ---
 
-**NeoDeon** n'est pas qu'un simulateur de vie ; c'est une démonstration de force technique où chaque GPIO de l'ESP32-S3 a été optimisé pour créer l'animal de compagnie virtuel le plus vivant jamais conçu par un maker.
+## ✨ Points Forts
+- **🔊 Immersion Totale :** Grâce au mode *Audio-to-Vibe*, le DEONGotchi vibre physiquement au rythme de ses cris et de ses battements de cœur.
+- **🚀 Performance S3 :** Utilisation de la PSRAM (8MB) pour des animations fluides sans ralentissement.
+- **🎮 Contrôle Rétro :** Navigation via un joystick tactile 5 directions pour une sensation "D-Pad" authentique.
+- **🔋 Autonomie Maximisée :** Régulateur LDO ultra-basse chute pour jouer jusqu'à la dernière goutte de la batterie LiPo.
+
+---
+
+## 🛠️ Architecture Matérielle
+
+
+
+### Composants Clés
+| Rôle | Référence | Protocole |
+| :--- | :--- | :--- |
+| **Cerveau** | ESP32-S3-WROOM-1-N16R8 | - |
+| **Écran** | LCD TFT (Driver ST7789V) | SPI |
+| **Audio** | MAX98357A (Amplificateur I2S) | I2S |
+| **Haptique** | DRV2605L (LRA Driver) | I2C / Analog In |
+| **Stockage** | Carte Micro SD | SDMMC (4-bit) |
+| **Régulateur** | XC6220B331MR (900mA) | LDO |
+
+### Configuration des Broches (Pinout)
+Le DEONGotchi utilise une configuration optimisée pour éviter les conflits de mémoire (PSRAM) et les broches de strapping :
+
+- **Navigation (Joystick) :** - UP: `GPIO 21` | DOWN: `GPIO 2` | LEFT: `GPIO 48` | RIGHT: `GPIO 47` | MID: `GPIO 1`
+- **Audio I2S :** `GPIO 15` (LRCLK), `16` (BCLK), `17` (DIN)
+- **Bus I2C :** `GPIO 4` (SDA), `5` (SCL)
+- **SD Card :** Bus SDMMC 4-bit (D3 sur `GPIO 3`)
+
+---
+
+## 💻 Logiciel
+Le firmware est conçu pour être modulaire. Il gère :
+1. **Moteur Haptique :** Synchronisation temps réel entre la sortie audio I2S et l'entrée trigger du DRV2605L.
+2. **Gestion SDMMC :** Chargement rapide des ressources graphiques depuis la carte SD.
+3. **Menu System :** Interface utilisateur pilotée par interruptions pour une réactivité instantanée du D-Pad.
+
+
+
+---
+
+## 📦 Installation & Build
+1. Clonez ce repository.
+2. Ouvrez le projet sous **VS Code + PlatformIO**.
+3. Sélectionnez l'environnement `esp32-s3-devkitc-1`.
+4. Build & Upload.
+
+---
+
+## 📸 Galerie
+*(Ajoutez ici vos photos du prototype et des captures d'écran du menu !)*
+
+---
+
+## 📜 Licence
+Projet créé par **DEON**. Tous droits réservés.
