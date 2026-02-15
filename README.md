@@ -4,7 +4,7 @@
 ![Interface](https://img.shields.io/badge/Interface-ST7789--LCD-blue)
 ![Audio](https://img.shields.io/badge/Audio-I2S--Haptic-brightgreen)
 
-**DEONGotchi** est une console de poche "Virtual Pet" nouvelle génération. Conçue par **DEON**, elle repousse les limites du genre en intégrant des retours haptiques haute définition synchronisés sur le son et un moteur de rendu fluide sur ESP32-S3.
+**DEONGotchi** est une console de poche "Virtual Pet" nouvelle génération. Conçue par **DEON electronics**, elle repousse les limites du genre en intégrant des retours haptiques haute définition synchronisés sur le son et un moteur de rendu fluide sur ESP32-S3.
 
 ---
 
