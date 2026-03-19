@@ -1,188 +1,243 @@
-
 ---
 
-# DEONGotchi — Console Open Source & Companion Polyvalent
+# DEONGotchi — Open Source Console & Versatile Companion
 
 ![Brand](https://img.shields.io/badge/Brand-DEON%20electronics-blue)
 ![Hardware](https://img.shields.io/badge/Hardware-ESP32--S3--N16R8-orange)
 ![License](https://img.shields.io/badge/License-Open%20Source-green)
 
-**DEONGotchi** est une console de poche **open source** basée sur **ESP32-S3**, pensée comme un **outil polyvalent** :
+**DEONGotchi** is an **open source** handheld console based on the **ESP32‑S3**, designed as a **versatile tool**:
 
-- 🎮 **Émulation de vieux jeux** (consoles rétro, mini-jeux maison)  
-- 🧬 **Création d’environnements virtuels** ou “petits OS” faits maison  
-- 🏠 **Contrôle de domotique** et d’objets connectés via **Wi-Fi** et **Bluetooth**  
-- 🎨 Expérimentations en UI/UX, haptique, audio embarqué, etc.
+- 🎮 **Retro game emulation** (old consoles, simple homebrew games)  
+- 🧬 **Custom virtual environments** or small DIY “OS‑like” systems  
+- 🏠 **Home automation / IoT control** via **Wi‑Fi** and **Bluetooth**  
+- 🎨 Experiments in UI/UX, haptics, and embedded audio
 
-Le but n’est pas seulement de faire un “Tamagotchi moderne”, mais une **plateforme modulaire** pour hacker, apprendre et prototyper des interfaces physiques interactives.
-
----
-
-## Objectifs du Projet
-
-- **Open hardware & open firmware** : schémas, PCB, code et exemples publics.
-- **Polyvalence** : pouvoir transformer le DEONGotchi en :
-  - Mini-console d’émulation (NES-like, GB-like, jeux simples…)
-  - Assistant virtuel, compagnon interactif, “petit OS” custom
-  - Télécommande domotique (MQTT, HTTP, BLE, etc.)
-  - Tableau de bord portable (capteurs, logs, notifications…)
-- **Accessibilité développeur** : firmware en C/C++ (ESP-IDF / Arduino / PlatformIO) ou MicroPython selon préférence, avec exemples de projets.
-- **Support des retours de la communauté** : contributions hardware / software encouragées.
+The goal is not just to build a “modern Tamagotchi”, but a **modular platform** to hack, learn, and prototype interactive physical interfaces.
 
 ---
 
-## Matériel (BOM principale)
+## Project Goals
 
-| Catégorie      | Référence                | Fonction                                        |
-| -------------- | ------------------------ | ----------------------------------------------- |
-| **MCU**        | ESP32-S3-WROOM-1-N16R8  | Dual-Core, Wi-Fi, BT, 16MB Flash, 8MB PSRAM     |
-| **Alimentation** | XC6220B331MR           | LDO 3.3V 900mA, ultra low-dropout               |
-| **Haptique**   | DRV2605LDGSR            | Pilote LRA haptique via I2C                     |
-| **Audio**      | MAX98357AETE+T          | Ampli audio numérique I2S, Classe D             |
-| **Affichage**  | HS20BS097RX             | Écran LCD / TFT haute clarté (SPI)              |
-| **Joystick**   | TS-1095PS-A1B2-C3D2     | Switch multidirectionnel 5 positions            |
-| **Stockage**   | µSD (SDMMC)             | Ressources, ROMs, assets, configs               |
-| **Alim batterie** | LiPo + charge externe | Alimentation nomade                             |
+- **Open hardware & open firmware**: public schematics, PCB, code, and examples  
+- **Versatility**: allow DEONGotchi to become:
+  - A mini emulation console (NES‑like, GB‑like, simple retro games)
+  - A virtual assistant, interactive companion, or custom “micro OS”
+  - A smart home remote (MQTT, HTTP, BLE, etc.)
+  - A portable dashboard (sensors, logs, notifications, etc.)
+- **Developer‑friendly**: firmware in C/C++ (ESP‑IDF / Arduino / PlatformIO) or MicroPython if preferred, with example projects
+- **Community‑driven**: hardware and software contributions are encouraged
 
 ---
 
-## Configuration Hardware
+## Hardware (Main BOM)
 
-### Gestion de l’énergie
-
-Le **XC6220B331MR** assure un 3.3V stable même quand la LiPo chute sous ~3.4V, pour éviter les resets lors de pics de consommation (Wi‑Fi, audio, etc.).  
-L’objectif est de garder le DEONGotchi **fiable** pour les usages longs (domotique, dashboard, jeux).
-
-### Joystick 5 directions (Active-Low)
-
-Le joystick est câblé en **logique active-bas**, avec GND commun :
-
-- **UP** : GPIO 21  
-- **DOWN** : GPIO 2  
-- **LEFT** : GPIO 48  
-- **RIGHT** : GPIO 47  
-- **MID (clic / validation)** : GPIO 1  
-
-Chaque direction est tirée à l’état haut via résistance de pull-up et passe à 0 (GND) lorsqu’on appuie.
-
-### Audio & Haptique
-
-- **Audio**  
-  - Ampli **MAX98357A** en **I2S**  
-  - Sortie vers un petit haut-parleur embarqué  
-  - Utilisable pour : sons de jeux, retours audio UI, notifications domotiques, etc.
-
-- **Vibreur / Haptique**  
-  - Pilote **DRV2605L** en **I2C**  
-  - GPIO SDA : 4 / SCL : 5  
-  - Permet de jouer des motifs de vibration complexes (feedback pour UI, alertes domotiques, interactions de jeux…).
+| Category        | Reference               | Function                                        |
+|----------------|-------------------------|-------------------------------------------------|
+| **MCU**        | ESP32-S3-WROOM-1-N16R8  | Dual‑core, Wi‑Fi, BT, 16MB Flash, 8MB PSRAM    |
+| **Power**      | XC6220B331MR            | 3.3V 900mA ultra low‑dropout LDO               |
+| **Haptics**    | DRV2605LDGSR            | LRA haptic driver via I²C                      |
+| **Audio**      | MAX98357AETE+T          | Digital I²S Class‑D audio amplifier            |
+| **Display**    | HS20BS097RX             | High‑clarity LCD / TFT (SPI)                   |
+| **Joystick**   | TS-1095PS-A1B2-C3D2     | 5‑way multidirectional switch                  |
+| **Storage**    | microSD (SDMMC)         | Resources, ROMs, assets, configs               |
+| **Battery**    | LiPo + external charger | Portable power supply                          |
 
 ---
 
-## Capacités logicielles
+## Power Management
 
-Grâce aux **8MB de PSRAM**, le DEONGotchi peut :
+The **XC6220B331MR** regulator provides a stable 3.3V rail even when the LiPo battery drops below ~3.4V, helping to avoid random resets during current peaks from Wi‑Fi or audio output.
 
-- Stocker des **framebuffers** pour affichage fluide (jeux, animations).
-- Gérer des **buffers audio** plus importants.
-- Charger des **assets** (sprites, tilesets, polices, etc.) en mémoire.
-
-### Périphériques et bus supportés
-
-1. **I2C**  
-   - DRV2605L (haptique)  
-   - Capteurs additionnels possibles (IMU, température, etc.)  
-   - Scanner I2C simple intégré au firmware d’exemple.
-
-2. **SPI**  
-   - Communication haute vitesse avec l’écran LCD/TFT  
-   - Option pour d’autres périphériques SPI (flash externe, capteurs…)
-
-3. **SDMMC / µSD**  
-   - Stockage de :  
-     - ROMs / jeux  
-     - Assets graphiques  
-     - Fichiers de config (Wi-Fi, profils domotiques, etc.)  
-   - Peut servir de base à un petit système de fichiers pour un environnement custom.
-
-4. **Wi-Fi & Bluetooth (ESP32-S3)**  
-   - Wi-Fi : HTTP, MQTT, WebSocket, REST API, intégration domotique (Home Assistant, etc.)  
-   - BLE : communication avec smartphone, capteurs, télécommandes personnalisées.
+This makes DEONGotchi suitable for **long‑running use cases** such as dashboards, home automation control, or always‑on companions.
 
 ---
 
-## Exemples de cas d’usage
+## Input — 5‑Way Joystick
 
-- **Mini-console d’émulation**  
-  - Lancer des émulateurs simples (8-bit / 16-bit light)  
-  - Lire des ROMs depuis la carte µSD  
-  - Utiliser le joystick + haptique + audio pour une expérience complète.
+The 5‑way joystick is wired in **active‑low logic** with a common GND:
 
-- **Enviro / OS custom**  
-  - Interface type “companion digital”  
-  - Affichage d’un environnement virtuel, d’un personnage, de stats, etc.  
-  - Sauvegarde des états sur µSD.
+- **UP**: GPIO 21  
+- **DOWN**: GPIO 2  
+- **LEFT**: GPIO 48  
+- **RIGHT**: GPIO 47  
+- **CENTER (confirm / click)**: GPIO 1  
 
-- **Contrôleur domotique**  
-  - Interface graphique avec menus pour piloter éclairages, volets, capteurs…  
-  - Communication via Wi-Fi (MQTT, HTTP) ou BLE  
-  - Retour haptique + audio pour confirmations d’actions.
-
-- **Dashboard portable**  
-  - Lecture de capteurs locaux ou réseau  
-  - Affichage de graphiques, logs, notifications  
-  - Utilisation comme “remote” pour un PC, un serveur, un cluster, etc.
+Each direction is normally pulled high and goes low (connected to GND) when pressed.
 
 ---
 
-## Stack logicielle & Frameworks
+## Audio & Haptics
 
-Le projet vise à rester **flexible** : tu peux choisir ton environnement :
+### Audio
 
-- **ESP-IDF** (officiel Espressif) pour un contrôle fin et des projets plus complexes
-- **Arduino / PlatformIO** pour un onboarding rapide
-- **MicroPython** / **CircuitPython** pour du prototypage rapide (si support adapté au S3 + PSRAM)
+- **Amplifier**: MAX98357A (I²S Class‑D)  
+- **Input**: Digital I²S audio stream from the ESP32‑S3  
+- **Output**: Small speaker on the device  
 
-Le dépôt fournit (ou fournira) :
+Use cases include:
 
-- Un **firmware de base** (menu, drivers écran/joystick/audio/I2C/SDMMC)
-- Des **exemples de projets** :
-  - Demo d’émulateur / jeu simple
-  - Demo domotique (ex : client MQTT)
-  - Demo companion / UI
+- Game audio and sound effects  
+- UI sounds and feedback  
+- Alerts/notifications for home automation or monitoring
 
----
+### Haptics
 
-## État du projet
+- **Driver**: DRV2605L  
+- **Bus**: I²C  
+  - SDA: GPIO 4  
+  - SCL: GPIO 5  
 
-- [ ] Hardware Vx validé / en cours d’itération  
-- [ ] Drivers de base (écran, audio, haptique, joystick)  
-- [ ] SDK / exemples pour développeurs  
-- [ ] Documentation d’API et tutoriels
+The DRV2605L can play complex vibration patterns independent of audio, making it useful for:
 
-Les informations peuvent évoluer, certaines parties sont encore expérimentales. N’hésite pas à ouvrir des issues / PR si tu repères des incohérences ou si tu veux proposer des améliorations.
-
----
-
-## Contribution
-
-Les contributions sont bienvenues :
-
-- **Hardware** : suggestions de composants, variantes de carte, shields ou docks.  
-- **Software** : drivers, exemples, mini-jeux, intégrations domotiques, outils PC.  
-- **Docs** : tutoriels, guides d’initiation, traductions.
-
-Tu peux :
-
-1. Fork le repo  
-2. Créer une branche (`feature/ma-fonctionnalite`)  
-3. Proposer une PR avec une description claire
+- UI feedback (clicks, confirmations, errors)  
+- Game haptics  
+- Silent alerts for notifications or events
 
 ---
 
-## Licence & Crédits
+## Memory & Performance
 
-- Projet open source initié par **DEON electronics**  
-- Hardware & firmware publiés sous licences ouvertes (à préciser : MIT, GPL, CERN OHL, etc.)
+With **8MB of PSRAM**, DEONGotchi can:
+
+- Store multiple **framebuffers** for smooth graphics (games, animations, dashboards)  
+- Use larger **audio buffers**  
+- Load **assets** (sprites, tilesets, fonts, etc.) into memory  
+
+This gives enough headroom for:
+
+- Lightweight emulators  
+- Custom “micro‑OS” UI  
+- Complex animations or interactive dashboards
+
+---
+
+## Buses & Peripherals
+
+### I²C
+
+Used for:
+
+- **DRV2605L** haptic driver  
+- Optional external sensors (IMU, temperature, light sensors, etc.)
+
+Typical firmware will include an **I²C scanner** on boot to detect connected devices.
+
+### SPI
+
+Used for:
+
+- **LCD/TFT display** (HS20BS097RX) with high‑speed SPI  
+- Optional extra SPI devices if needed (external flash, sensors, etc.)
+
+### SDMMC (microSD)
+
+- Stores:
+  - ROMs and games  
+  - Graphics and sound assets  
+  - Configuration files (Wi‑Fi credentials, domotics profiles, etc.)  
+- Can act as the main resource storage for custom environments or small OS‑like systems.
+
+### Wi‑Fi & Bluetooth (ESP32‑S3)
+
+- **Wi‑Fi**:
+  - HTTP / REST APIs  
+  - MQTT for home automation (e.g. Home Assistant)  
+  - WebSockets, simple web UI, etc.
+- **Bluetooth**:
+  - BLE communication with smartphones  
+  - Custom BLE services for control or data display  
+  - Remote control peripherals
+
+---
+
+## Example Use Cases
+
+### 1. Mini Emulation Console
+
+- Run simple emulators (8‑bit / lightweight 16‑bit)  
+- Load ROMs from microSD  
+- Control via 5‑way joystick  
+- Audio + haptic feedback for a complete “pocket console” experience
+
+### 2. Custom Virtual Environment / Companion
+
+- Create your own **virtual pet**, assistant, or simulation  
+- Display character states, stats, or environments on screen  
+- Store save files and states on microSD  
+- Use haptics/audio to give personality to the companion
+
+### 3. Home Automation Controller
+
+- UI with menus to control lights, shutters, scenes, etc.  
+- Communicate via Wi‑Fi (MQTT/HTTP) or BLE with your smart home system  
+- Use vibrations and sounds as confirmation or error feedback  
+
+DEONGotchi can act as a **dedicated, physical remote** for your smart home.
+
+### 4. Portable Dashboard / Monitor
+
+- Display sensor data (local or via network)  
+- Show logs, alerts, or system status  
+- Integrate with servers, clusters, or IoT devices  
+- Useful as a small **status monitor** you can carry around
+
+---
+
+## Software Stack & Development
+
+The project aims to stay **flexible** so you can choose your preferred development environment:
+
+- **ESP‑IDF** (official Espressif framework) for low‑level control and advanced projects  
+- **Arduino / PlatformIO** for easier onboarding and faster prototyping  
+- **MicroPython** / **CircuitPython** (where supported on ESP32‑S3 + PSRAM) for scripting‑style development
+
+The repository will provide:
+
+- A **base firmware** with:
+  - Display driver  
+  - Joystick input handling  
+  - Audio (I²S)  
+  - Haptics (DRV2605L via I²C)  
+  - microSD (SDMMC) and basic filesystem handling
+- **Example projects**, such as:
+  - Simple game / emulator demo  
+  - Home automation client (e.g. MQTT controller)  
+  - Companion / UI demo
+
+---
+
+## Project Status
+
+- [ ] Hardware revision validated / under iteration  
+- [ ] Core drivers (display, audio, haptics, joystick)  
+- [ ] SDK / example firmwares for developers  
+- [ ] API documentation and tutorials  
+
+Some parts are still experimental and may change. Feedback and suggestions are very welcome via issues or pull requests.
+
+---
+
+## Contributing
+
+Contributions of all kinds are welcome:
+
+- **Hardware**: alternative components, board revisions, shields, or docks  
+- **Software**: drivers, libraries, examples, games, domotics integrations, PC tools  
+- **Documentation**: tutorials, “getting started” guides, translations
+
+Typical workflow:
+
+1. Fork the repository  
+2. Create a feature branch (`feature/my-awesome-idea`)  
+3. Open a Pull Request with a clear description and rationale
+
+---
+
+## License & Credits
+
+- Project initiated by **DEON electronics**  
+- Hardware and firmware are released under open source licenses  
+  - (To be defined precisely: e.g. MIT / GPL for firmware, CERN OHL for hardware, etc.)
 
 ---
