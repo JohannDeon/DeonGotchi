@@ -1,6 +1,9 @@
 ---
+
 # Project Status
+
 **In progress waiting for components**
+
 ---
 ## Repository Structure
     BlinkerOne
