@@ -1,6 +1,18 @@
-##
- Repository Structure
-text BlinkerOne/ ├── Documents/ │ ├── Critical_Item_Development_Specification(CIDS).pdf │ ├── Hardware_Description_Document(HDD).pdf │ ├── Software_Description_Document(SDD).pdf │ └── Components_Derating.pdf ├── Hardware/ │ ├── Gerber/ │ ├── Schematic/ │ └── Bill_Of_Materials(BOM).xlsx └── Software/ ├── Sources/ └── BlinkerOne_MAIN_FlowDiagram.pdf
+## Repository Structure
+
+- **BlinkerOne**
+  - **Documents**
+    - `Critical_Item_Development_Specification(CIDS).pdf`
+    - `Hardware_Description_Document(HDD).pdf`
+    - `Software_Description_Document(SDD).pdf`
+    - `Components_Derating.pdf`
+  - **Hardware**
+    - `Gerber/`
+    - `Schematic/`
+    - `Bill_Of_Materials(BOM).xlsx`
+  - **Software**
+    - `Sources/`
+    - `BlinkerOne_MAIN_FlowDiagram.pdf`
 
 ---
 # Blinker One - Open Source Console & Versatile Companion
