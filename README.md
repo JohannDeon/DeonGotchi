@@ -1,9 +1,7 @@
 ---
 ## Repository Structure
-
     BlinkerOne
     .
-    ├── ...
     ├── Documents
     │   ├── Critical_Item_Development_Specification(CIDS).pdf
     │   ├── Hardware_Description_Document(HDD).pdf
@@ -16,7 +14,6 @@
     └── Software
         ├── Sources/
         └── BlinkerOne_MAIN_FlowDiagram.pdf
-        └── ...
 
 ---
 # Blinker One - Open Source Console & Versatile Companion
