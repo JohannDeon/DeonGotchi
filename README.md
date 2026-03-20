@@ -1,6 +1,7 @@
 ---
 
-# Blinker One — Open Source Console & Versatile Companion
+# Blinker One
+Open Source Console & Versatile Companion
 
 ![Brand](https://img.shields.io/badge/Brand-DEON%20electronics-blue)
 ![Hardware](https://img.shields.io/badge/Hardware-ESP32--S3--N16R8-orange)
