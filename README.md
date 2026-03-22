@@ -1,6 +1,27 @@
 ---
+# Project Status
 
-# Blinker One — Open Source Console & Versatile Companion
+🚧 In progress waiting for components
+
+---
+## Repository Structure
+    BlinkerOne
+    .
+    ├── Documents
+    │   ├── Critical_Item_Development_Specification(CIDS).pdf
+    │   ├── Hardware_Description_Document(HDD).pdf
+    │   ├── Software_Description_Document(SDD).pdf
+    │   └── Components_Derating.pdf
+    ├── Hardware
+    │   ├── Gerber/
+    │   ├── Schematic/
+    │   └── Bill_Of_Materials(BOM).xlsx
+    └── Software
+        ├── Sources/
+        └── BlinkerOne_MAIN_FlowDiagram.pdf
+
+---
+# Blinker One - Open Source Console & Versatile Companion
 
 ![Brand](https://img.shields.io/badge/Brand-DEON%20electronics-blue)
 ![Hardware](https://img.shields.io/badge/Hardware-ESP32--S3--N16R8-orange)
