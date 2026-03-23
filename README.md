@@ -1,7 +1,7 @@
 # Blinker One
 
 🚧 **Work in progress** — waiting for some components before the next hardware tests.
-
+![Alt text](relative%20Documents/Images/3D_PCB_1.png?raw=true "3D_render")
 ## What is it?
 
 Blinker One is an open source handheld device based on the **ESP32-S3**.
