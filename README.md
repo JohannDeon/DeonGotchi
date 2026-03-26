@@ -1,7 +1,7 @@
 # Blinker One
 <p align="center">
   <a href="https://github.com/johanndeon/BlinkerOne">
-    <img src="https://hitscounter.dev/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fjohanndeon%2FBlinkerOne&title=Views&edge_flat=true" alt="Views">
+    <img src="https://komarev.com/ghpvc/?username=johanndeon.BlinkerOne&label=Views&color=blue&style=flat-square" alt="Views">
   </a>
 </p>
 
