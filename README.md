@@ -1,9 +1,5 @@
 # Blinker One
-<p align="center">
-  <a href="https://github.com/johanndeon/BlinkerOne">
-    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fjohanndeon%2FBlinkerOne&title=Views&edge_flat=true" alt="Views">
-  </a>
-</p>
+[![views](https://hits.dwyl.com/johanndeon/BlinkerOne.svg?style=flat-square)](https://hits.dwyl.com/johanndeon/BlinkerOne)
 
 🚧 **Work in progress** — waiting for some components before the next hardware tests.
 
