@@ -1,6 +1,8 @@
 # Blinker One
 <p align="center">
-  [![views](https://hits.dwyl.com/johanndeon/BlinkerOne.svg?style=flat-square)](https://hits.dwyl.com/johanndeon/BlinkerOne)
+  <a href="https://hits.dwyl.com/johanndeon/BlinkerOne">
+    <img src="https://hits.dwyl.com/johanndeon/BlinkerOne.svg?style=flat-square&label=Views" alt="Views">
+  </a>
 </p>
 
 🚧 **Work in progress** — waiting for some components before the next hardware tests.
