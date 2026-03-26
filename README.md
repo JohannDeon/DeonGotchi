@@ -1,6 +1,6 @@
 # Blinker One
 
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/johanndeon/BlinkerOne)](https://hits.seeyoufarm.com)
+[![Hits](https://hits.dwyl.com/johanndeon/BlinkerOne.svg?style=flat-square)](https://hits.dwyl.com/johanndeon/BlinkerOne)
 
 🚧 **Work in progress** — waiting for some components before the next hardware tests.
 
